@@ -1,0 +1,75 @@
+﻿<Window x:Class="RYLWebshopApp.MailBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="📬 Mailbox"
+        Height="500" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#FF1E1E2F">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Player Info -->
+        <TextBlock x:Name="txtPlayerInfo"
+                   FontSize="16"
+                   Foreground="WhiteSmoke"
+                   Margin="0,0,0,10"/>
+
+        <!-- Mail List -->
+        <DataGrid x:Name="dgMail"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Background="#FF2C2C3C"
+                  Foreground="WhiteSmoke"
+                  RowBackground="#332C2C3C"
+                  AlternatingRowBackground="#442C2C3C"
+                  BorderBrush="Gray"
+                  BorderThickness="1"
+                  HeadersVisibility="Column"
+                  SelectionMode="Single">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="📅 Date"
+                                    Binding="{Binding Date}"
+                                    Width="150"/>
+                <DataGridTextColumn Header="🎮 Item"
+                                    Binding="{Binding ItemID}"
+                                    Width="150"/>
+                <DataGridTextColumn Header="💬 Message"
+                                    Binding="{Binding Message}"
+                                    Width="*"/>
+                <DataGridTextColumn Header="✅ Claimed"
+                                    Binding="{Binding Claimed}"
+                                    Width="100"/>
+
+                <DataGridTemplateColumn Header="🎁 Action" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="🎁 Claim"
+                                    Click="ClaimButton_Click"
+                                    Tag="{Binding}"
+                                    IsEnabled="{Binding CanClaim}"
+                                    Padding="5,2"
+                                    Background="#FF3A6EA5"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Cursor="Hand"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Status Bar -->
+        <TextBlock x:Name="lblStatus"
+                   Grid.Row="2"
+                   FontSize="14"
+                   Foreground="LightGray"
+                   Margin="5,10,5,0"/>
+    </Grid>
+</Window>
